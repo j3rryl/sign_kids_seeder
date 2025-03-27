@@ -30,16 +30,16 @@ async function uploadFile(localPath, destPath) {
 
 async function seedFirestore() {
   for (const item of items) {
-    const imagePath = path.join(__dirname, `images/${item}.png`);
-    const videoPath = path.join(__dirname, `videos/${item}.mp4`);
+    const imagePath = path.join(__dirname, `images/${item}.jpeg`);
+    // const videoPath = path.join(__dirname, `videos/${item}.mp4`);
 
     if (!fs.existsSync(imagePath) || !fs.existsSync(videoPath)) {
       console.warn(`Missing files for ${item}, skipping...`);
       continue;
     }
 
-    const imageUrl = await uploadFile(imagePath, `modules/${item}.png`);
-    const videoUrl = await uploadFile(videoPath, `modules/${item}.mp4`);
+    const imageUrl = await uploadFile(imagePath, `images/${item}.jpeg`);
+    // const videoUrl = await uploadFile(videoPath, `images/${item}.mp4`);
 
     await db
       .collection("modules")
@@ -54,7 +54,7 @@ async function seedFirestore() {
         userUid: "cl3m0JkOdxOtPwWmwuKux4dBmTk2",
         title: item,
         imagePath: imageUrl,
-        videoPath: videoUrl,
+        // videoPath: videoUrl,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
