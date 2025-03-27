@@ -4,7 +4,8 @@
   "description": "Seeder for firebase",
   "main": "main.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "seed": "node seed.js"
   },
   "keywords": [
     "seeder"
