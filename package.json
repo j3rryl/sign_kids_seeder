@@ -1,0 +1,17 @@
+{
+  "name": "sign_kids_seeder",
+  "version": "1.0.0",
+  "description": "Seeder for firebase",
+  "main": "seed.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "seeder"
+  ],
+  "author": "Jeremy Munroe",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^13.2.0"
+  }
+}
