@@ -2,11 +2,10 @@ const admin = require("firebase-admin");
 const fs = require("fs");
 const path = require("path");
 
-// Initialize Firebase Admin
 const serviceAccount = require("./serviceAccount.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: "your-project-id.appspot.com", // Replace with your Firebase Storage bucket
+  storageBucket: "gs://signkids-87524.firebasestorage.app", // Replace with your Firebase Storage bucket
 });
 
 const db = admin.firestore();
@@ -15,10 +14,17 @@ const bucket = admin.storage().bucket();
 // Alphabets and Numbers
 const items = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ", ..."0123456789"];
 
+function getRandomOptions(correct) {
+  let allChoices = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ", ..."0123456789"];
+  allChoices = allChoices.filter((choice) => choice !== correct); // Remove correct answer
+  let randomChoices = allChoices.sort(() => 0.5 - Math.random()).slice(0, 2); // Pick 2 random options
+  return [...randomChoices, correct].sort(() => 0.5 - Math.random()); // Add correct answer & shuffle
+}
+
 async function uploadFile(localPath, destPath) {
   const file = bucket.file(destPath);
   await bucket.upload(localPath, { destination: destPath });
-  await file.makePublic(); // Make it public (optional)
+  await file.makePublic();
   return file.publicUrl();
 }
 
@@ -35,12 +41,22 @@ async function seedFirestore() {
     const imageUrl = await uploadFile(imagePath, `modules/${item}.png`);
     const videoUrl = await uploadFile(videoPath, `modules/${item}.mp4`);
 
-    await db.collection("modules").doc(item).set({
-      title: item,
-      image: imageUrl,
-      video: videoUrl,
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    await db
+      .collection("modules")
+      .doc(item)
+      .set({
+        answer: item,
+        question: "What is this sign?",
+        content: `This is the sign for the letter/item '${item}'.`,
+        options: getRandomOptions(item),
+        parentUid: "",
+        userName: "Leah",
+        userUid: "cl3m0JkOdxOtPwWmwuKux4dBmTk2",
+        title: item,
+        imagePath: imageUrl,
+        videoPath: videoUrl,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
 
     console.log(`Seeded ${item} successfully`);
   }

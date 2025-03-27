@@ -2,9 +2,9 @@
   "name": "sign_kids_seeder",
   "version": "1.0.0",
   "description": "Seeder for firebase",
-  "main": "seed.js",
+  "main": "main.js",
   "scripts": {
-    "test": "test"
+    "test": "node test.js"
   },
   "keywords": [
     "seeder"
