@@ -1,0 +1,1 @@
+firebase functions:config:set email.user="your-email@gmail.com" email.pass="your-email-password"
