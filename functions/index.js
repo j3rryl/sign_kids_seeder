@@ -22,6 +22,7 @@ const transporter = nodemailer.createTransport({
 
 exports.sendEmail = functions.https.onCall(async (data, context) => {
   const { email, subject, message } = data;
+  console.log(data);
 
   if (!email || !subject || !message) {
     throw new functions.https.HttpsError(
@@ -31,7 +32,7 @@ exports.sendEmail = functions.https.onCall(async (data, context) => {
   }
 
   const mailOptions = {
-    from: "your-email@gmail.com",
+    from: user,
     to: email,
     subject: subject,
     text: message,
