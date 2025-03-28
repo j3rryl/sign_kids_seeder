@@ -20,14 +20,13 @@ const transporter = nodemailer.createTransport({
   auth: { user, pass },
 });
 
-exports.sendEmail = functions.https.onCall(async (data, context) => {
+exports.sendEmail = functions.https.onCall(async ({ data }) => {
   const { email, subject, message } = data;
-  console.log(data);
 
   if (!email || !subject || !message) {
     throw new functions.https.HttpsError(
       "invalid-argument",
-      "Missing parameters"
+      "Missing parameters" + data
     );
   }
 
