@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable object-curly-spacing */
+/* eslint-disable indent */
 const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
 
