@@ -5,7 +5,7 @@ const path = require("path");
 const serviceAccount = require("./serviceAccount.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: "gs://signkids-87524.firebasestorage.app", // Replace with your Firebase Storage bucket
+  storageBucket: "gs://signkids-ea83b.firebasestorage.app", // Replace with your Firebase Storage bucket
 });
 
 const db = admin.firestore();
@@ -52,8 +52,8 @@ async function seedFirestore() {
         content: `This is the sign for the letter/item '${item}'.`,
         options: getRandomOptions(item),
         parentUid: "",
-        userName: "Leah",
-        userUid: "cl3m0JkOdxOtPwWmwuKux4dBmTk2",
+        userName: "Leah Njoki",
+        userUid: "ausseOodBQcuNWGFzRTfpBn5K4G2",
         title: item,
         imagePath: imageUrl,
         // videoPath: videoUrl,
