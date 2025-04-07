@@ -3,4 +3,10 @@ serviceAccount.json
 node_modules/*
 images/*
 /images/*
+/videos/*
+videos/*
+categories/*
+/categories/*
+
+
 
