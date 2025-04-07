@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "signkids-87524"
-  }
+    "default": "signkids-ea83b",
+    "staging": "signkids-ea83b"
+  },
+  "targets": {},
+  "etags": {}
 }
