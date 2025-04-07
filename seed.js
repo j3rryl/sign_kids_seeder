@@ -65,7 +65,7 @@ async function seedFirestore() {
     return;
   }
 
-  const iconUrl = await uploadFile(imagePath, `images/const_path/icon.png`);
+  const iconUrl = await uploadFile(iconPath, `images/const_path/icon.png`);
   // Loop through each category
   for (const category of categories) {
     const categoryPath = path.join(__dirname, `categories/${category}.mp4`);
@@ -74,7 +74,7 @@ async function seedFirestore() {
       continue;
     }
     const categoryUrl = await uploadFile(
-      videoPath,
+      categoryPath,
       `categories/${category}.mp4`
     );
     await db
@@ -98,7 +98,10 @@ async function seedFirestore() {
     // Loop through each item in the category
     for (const item of items[category]) {
       let imageUrl = "";
-      const imagePath = path.join(__dirname, `images/${category}/${item}.jpeg`);
+      const imagePath = path.join(
+        __dirname,
+        `images/${category}/${item}/${item}.jpeg`
+      );
       const videoPath = path.join(__dirname, `videos/${category}/${item}.mp4`);
 
       // Check if the video file exists (if you want to use it)
