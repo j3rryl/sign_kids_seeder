@@ -71,11 +71,24 @@ async function seedFirestore() {
     const categoryPath = path.join(__dirname, `categories/${category}.mp4`);
     if (!fs.existsSync(categoryPath)) {
       console.warn(`Missing video file for category ${category}, skipping...`);
-      continue;
+      return;
     }
     const categoryUrl = await uploadFile(
       categoryPath,
       `categories/${category}.mp4`
+    );
+
+    const categoryImagePath = path.join(
+      __dirname,
+      `categories/${category}.jpeg`
+    );
+    if (!fs.existsSync(categoryPath)) {
+      console.warn(`Missing image file for category ${category}, skipping...`);
+      return;
+    }
+    const categoryImageUrl = await uploadFile(
+      categoryImagePath,
+      `categories/${category}.jpeg`
     );
     await db
       .collection("modules")
@@ -90,7 +103,7 @@ async function seedFirestore() {
         userUid: "ausseOodBQcuNWGFzRTfpBn5K4G2",
         title: category,
         videoPath: categoryUrl,
-        imagePath: iconUrl,
+        imagePath: categoryImageUrl,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       });
     console.log(`Seeded category ${category} successfully`);
